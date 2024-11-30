@@ -1,0 +1,286 @@
+#!/usr/bin/env python3
+
+import random
+
+# ANSI escape codes for purple text
+PURPLE = "\033[95m"
+RESET = "\033[0m"
+
+# Quotes (fill in your own!)
+quotes = [
+    "You must be the change you wish to see in the world. -Mahatma Gandhi ",
+    "The only thing we have to fear is fear itself. -Franklin D. Roosevelt",
+    "Well done is better than well said. -Benjamin Franklin",
+    "It is during our darkest moments that we must focus to see the light. -Aristotle",
+    "The future belongs to those who believe in the beauty of their dreams. -Eleanor Roosevelt",
+    "In the end, it's not the years in your life that count. It's the life in your years. -Abraham Lincoln",
+    "Life is either a daring adventure or nothing. -Helen Keller",
+    "You have brains in your head. You have feet in your shoes. You can steer yourself any direction you choose. -Dr. Seuss",
+    " A rose by any other name would smell as sweet.",
+    "Time you enjoy wasting is not wasted time." ,
+    "The time is always right to do what is right.",
+    "You'll miss the best things if you keep your eyes shut.",
+    "If life were predictable it would cease to be life, and be without flavour",
+
+]
+
+# 20 proper animal ASCII arts
+animals = [
+    r"""
+                           _,,......_
+                 ,-'          `'--.
+              ,-'  _              '-.
+     (`.    ,'   ,  `-.              `.
+      \ \  -    / )    \               \
+       `\`-^^^, )/      |     /         :
+         )^ ^ ^V/            /          '.
+         |      )            |           `.
+         9   9 /,--,\    |._:`         .._`.
+         |    /   /  `.  \    `.      (   `.`.
+         |   / \  \    \  \     `--\   )    `.`.___
+        .;;./  '   )   '   )       ///'       `-"'
+        `--'   7//\    ///\
+    """,
+    r"""
+                                                        _  _
+                                                 (\\( \
+                                                  `.\-.)
+                              _...._            _,-'   `-.
+\                           ,'      `-._.---.,-'       .  \
+ \`.                      ,'                               `.
+  \ `-...__              /                           .   .:  y
+   `._     ``--..__     /                           ,'`---._/
+      `-._         ``--'                      |    /_
+          `.._                   _            ;   <_ \
+              `--.___             `.           `-._ \ \
+                     `--<           `.     (\ _/)/ `.\/
+                         \            \     `
+    """,
+    r"""
+       _                                                      _
+::``--..__                                     ___..--''::
+|::::::::::`-.._                          _,-':::::::::::|
+|:::((o)):,--.:::.                      ,::::--::((o)):::|
+::|___(::'--';--::`.     \      /     ,'-':::`--'::)___|:;
+ :_|::::::;'_     `-`.   :     :    ,'       ,`:::::::|_:
+ |:::)__)(   `-._     `. :     |  ,'      ,-'   ):)__)::|
+ |::/__/::\`-..__;-._   \ \    ; /     ,-'--.._/:/__/:::;
+ ::'--'::::\  ____   `.  \ \,./ /   ,-'     ,-::'--':::/
+  \:::::::::`'.   ``-._`. \()()/ ,-'--..__,:::::::_::;'
+   `>''''---...`------,:.`.>'`<,'_____.'... --'''     `.
+  ,'     __:._ _..--''   ,`:  ;`.     ``--._````---..._::
+ /: --:''    _/        ,','|`'|`.`.         |``--..__ .:|
+(::.  :. _,-' \      ,' / /|--|\ `.`.       ;._  .:  `:::
+ \:: _:'::.  ,'`---,' ,' / |--| \  ` `. __,'.  `-:'    :/
+  \;'    ':;' '. ,' ,'  /  :--;  \  `. `. .:.`.   `.-._/
+   \'.   ,;-.  ,'  /':./    \/    \.:'\  `.  ,-:..:'  /
+    `:.,'((O))/   /   /            \   \ .'\((O))`: ,'
+      `-._`-'/':./ _,'              `-._\   \`-'_,-'
+          `-:___:-'                     `-.__;-'    SSt
+
+    """,
+    r"""
+                               MMMMMMM                     MMMMMMMMMMMMMM
+                      MMMMMMMMMMMM                MMMMMMMMMMMMMMMMMMM
+                    MMMMMMMMMMMMMMMM                MMMMMMMMMMMMMMMMM
+               MMMMMMMMMMMMMMMMMMMMMM              MMMMMMMMMMMMM   MM
+            MMMMMMMMMMMMMMMMMMMMMMMMMMM            MMMMMMMMMMM
+          MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM        MMMMMMMMMMMM
+        MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM    MMMMMMMMMMMMM
+        MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+       MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+       MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+       MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+      MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+     MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+    MMMMMMMM  MMMMMMMM  MMMMMMMMMMMMMMMMMMMM
+   MMMMM  M   MMMMMMM       MNMMMMMMMMMMMMMM
+ MMMMM  MMMM  MMMMMM          MMMMM  MMMMMM
+MMMMMM  MMM  MMMMMM           MMMMM   MMMMM
+MMMMM     M  MMMMM            MMMM     MMMM
+MMMM        MMMMM           MMMMMM      MMMMM
+ MMM       MMMMMMM          NMMMMM      MMMMM
+ MM         MMMM             MMMM         MMM
+MMMM         MMMM           MMMM           MM
+ MMM          MMM           MMM            MMM
+ MMMM         MMMM         MMM              MMM
+ MMMMM         MMM        MMMM               MMM
+   MMMMMM      MMMM        MMMM              MMMMMM
+      MMM       MMMMM       MMMM              MMMMMM
+                  MASTEL                        MMMMM    arm°
+                    MMMMM
+    """,
+    r"""
+                       `         '
+;,,,             `       '             ,,,;
+`YES8888bo.       :     :       .od8888YES'
+  888IO8DO88b.     :   :     .d8888I8DO88
+  8LOVEY'  `Y8b.   `   '   .d8Y'  `YLOVE8
+ jTHEE!  .db.  Yb. '   ' .dY  .db.  8THEE!
+   `888  Y88Y    `b ( ) d'    Y88Y  888'
+    8MYb  '"        ,',        "'  dMY8
+   j8prECIOUSgf"'   ':'   `"?g8prECIOUSk
+     'Y'   .8'     d' 'b     '8.   'Y'
+      !   .8' db  d'; ;`b  db '8.   !
+         d88  `'  8 ; ; 8  `'  88b
+        d88Ib   .g8 ',' 8g.   dI88b
+       :888LOVE88Y'     'Y88LOVE888:
+       '! THEE888'       `888THEE !'
+          '8Y  `Y         Y'  Y8'
+           Y                   Y
+           !                   !
+
+    """,
+    r"""
+                   __,--'""`-.
+                               _,'   ,::'-.  \
+                            _,'  ,::::; ,. )  |
+                          ,'  ,::"' ,::::' )  |
+                        ,'  ,;" ,:;" '     \  |
+                       ; ,;' ,'_,-"`._    .'  |
+                     ,':'.. _,':',$'  `.   )  |
+                   ,', .::,'    `',$$   ^.;_,'
+                  /,'!!!,d.      $"'    /"|
+                 /,!!!,' Y8P     ;$"'  ,','
+                /,!!,',' d8'   ,$$$' ,','
+          ,' , /!!!/,'  , `8b  `$' ,;'
+        ,',-' /!!,'   ,'  ,8F    ,;/
+      _(_;___/::/::,------------',-.
+   ,-'__  .:. .:  : "".,-"".,'"-" /
+   \ :`-': `:.`:  ;    )    |   ;'
+    )\_"'(\   ,-.'    /_   ;   /
+  ,:'  `-| \  | |    ,\_\  ;--'
+ (/    ,'_;-`-; ;___,\__\\'
+    ,::''    /,'        | \
+           ,;'          ", \
+          `'              "`'
+    """,
+    r"""
+                          .oMc
+                        .MMMMMP
+                      .MM888MM
+....                .MM88888MP
+MMMMMMMMb.         d8MM8tt8MM
+ MM88888MMMMc `:' dMME8ttt8MM
+  MM88tt888EMMc:dMM8E88tt88MP
+   MM8ttt888EEM8MMEEE8E888MC
+   `MM888t8EEEM8MMEEE8t8888Mb
+    "MM88888tEM8"MME88ttt88MM
+     dM88ttt8EM8"MMM888ttt8MM
+     MM8ttt88MM" " "MMNICKMM"
+     3M88888MM"      "MMMP"
+      "MNICKM"
+    """,
+    r"""
+                   ,
+      _,-'\   /|   .    .    /`.
+  _,-'     \_/_|_  |\   |`. /   `._,--===--.__
+ ^       _/"/  " \ : \__|_ /.   ,'    :.  :. .`-._
+        // ^   /7 t'""    "`-._/ ,'\   :   :  :  .`.
+        Y      L/ )\         ]],'   \  :   :  :   : `.
+        |        /  `.n_n_n,','\_    \ ;   ;  ;   ;  _>
+        |__    ,'     |  \`-'    `-.__\_______.==---'
+       //  `""\\      |   \            \
+       \|     |/      /    \            \
+                     /     |             `.
+                    /      |               ^
+                   ^       |
+                           ^
+    """,
+    r"""
+       __
+              FISHKISSFISHKIS
+       SFISHKISSFISHKISSFISH            F
+    ISHK   ISSFISHKISSFISHKISS         FI
+  SHKISS   FISHKISSFISHKISSFISS       FIS
+HKISSFISHKISSFISHKISSFISHKISSFISH    KISS
+  FISHKISSFISHKISSFISHKISSFISHKISS  FISHK
+      SSFISHKISSFISHKISSFISHKISSFISHKISSF
+  ISHKISSFISHKISSFISHKISSFISHKISSF  ISHKI
+SSFISHKISSFISHKISSFISHKISSFISHKIS    SFIS
+  HKISSFISHKISSFISHKISSFISHKISS       FIS
+    HKISSFISHKISSFISHKISSFISHK         IS
+       SFISHKISSFISHKISSFISH            K
+         ISSFISHKISSFISHK
+
+    """,
+
+    r"""
+    '
+''---.  .-.   .--,;._
+  '   `-\  \-' ./|\\ `'-.
+  .-----,| |--'/ | \\    \
+ /     | | |  /  |  \\   /
+       | | | /   |   \`'`
+       ) | | |  /\   /                   ,,
+      / ;| | `-'  `'`                     \`-.
+     / / | |                   ,'          |   \
+ \_.' /  ; |            .-'-.,','           |  '.
+ ,_.' ,-'  ;               ) )/|            |   |
+    ,'      \         __ ,''  ''`.         _|   |--,.
+   /         `.     ,',./ .-.-.   \.--.  / _) _,'--. )
+  |       ---..`.._| |   /__|__\   ,-. \ |`/ ( `--. _)
+  \            `.  '\_;  ((o|o))    ,' | \<_, `'-, )
+   `.            \   ,-''.--'--.''-. _,'  \    __. '.
+     `.          |  /    \     /    \     /  ,'   `._)
+       \        ,' | .'   `-.-'   '. |   /  /
+       /      _,   | |      |      | |../  ,'
+     .'  /'--'._,,_ \ \     |     / .'    /
+    (_._ '''-._    `.\ `.   |   ,' ,' ___/
+        `-.    \      '. `'-'-'` ,'-'`
+           \ `. \      |`'-...-'`
+           | ; \ |    /  /
+           | | | /  ,' .'     ____
+          (_/.'-'  (   `.   ,'    `'._
+                     `.  `-'     --.. )
+                       `.       .--. `\
+                         `.__.-\ \  `\_)
+                               ( /mx
+    """,
+    r"""
+                                   _
+                          .' `'.__
+                         /      \ `'"-,
+        .-''''--...__..-/ .     |      \
+      .'               ; :'     '.  a   |
+     /                 | :.       \     =\
+    ;                   \':.      /  ,-.__;.-;`
+   /|     .              '--._   /-.7`._..-;`
+  ; |       '                |`-'      \  =|
+  |/\        .   -' /     /  ;         |  =/
+  (( ;.       ,_  .:|     | /     /\   | =|
+   ) / `\     | `""`;     / |    | /   / =/
+     | ::|    |      \    \ \    \ `--' =/
+    /  '/\    /       )    |/     `-...-`
+   /    | |  `\    /-'    /;
+   \  ,,/ |    \   D    .'  \
+jgs `""`   \  nnh  D_.-'L__nnh
+            `^^^
+
+
+    """,
+    r"""
+         ...    *    .   _  .
+*  .  *     .   * (_)   *
+  .      |*  ..   *   ..
+   .  * \|  *  ___  . . *
+*   \/   |/ \/{o,o}     .
+  _\_\   |  / /)  )* _/_ *
+      \ \| /,--"-"---  ..
+_-----  |(,__,__/__/_ .
+       \ ||      ..
+        ||| .            *
+        |||
+ejm98   |||
+  , -=-~' .-^- _
+
+  """
+]
+
+# Randomly pick a quote and an animal
+quote = random.choice(quotes)
+animal = random.choice(animals)
+
+# Display the quote in purple with a random animal
+print(f"{PURPLE}{quote}{RESET}")
+print(animal)
